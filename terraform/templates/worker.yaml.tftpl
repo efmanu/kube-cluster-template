@@ -1,0 +1,13 @@
+#cloud-config
+runcmd:
+  - |
+    set -e
+    for i in $(seq 1 90); do
+      if curl -skf "https://${master_ip}:6443/ping" >/dev/null 2>&1; then
+        echo "control plane reachable"
+        break
+      fi
+      echo "waiting for control plane (attempt $i)"
+      sleep 10
+    done
+    curl -sfL https://get.k3s.io | K3S_URL='https://${master_ip}:6443' K3S_TOKEN='${k3s_token}' sh -

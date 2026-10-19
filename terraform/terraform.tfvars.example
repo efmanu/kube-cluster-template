@@ -1,0 +1,12 @@
+# Copy this file to `terraform.tfvars` and fill in real values.
+# `terraform.tfvars` is git-ignored, so your secrets stay out of version control.
+
+region = "syd"
+image  = "ubuntu-24.04"
+size   = "std-min"
+
+# Root password for both servers (required).
+root_password = "replace-with-a-strong-password"
+
+# Shared k3s cluster token (required). Generate with: openssl rand -hex 16
+k3s_token = "replace-with-a-random-hex-token"
